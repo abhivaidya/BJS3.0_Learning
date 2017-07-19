@@ -10,16 +10,11 @@ class Game
     public static CLONE : number = 1;
     public static INSTANCE : number = 2;
 
-    private shadowGenerator;
-    private player;
-
-    private _controller : Controller;
-
     constructor(canvasElement:string)
     {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById(canvasElement);
         this.engine = new BABYLON.Engine(canvas, true);
-        this.engine.enableOfflineSupport = false;
+        //this.engine.enableOfflineSupport = false;
 
         this.assets = [];
         this.scene = null;
@@ -73,37 +68,6 @@ class Game
     private _init ()
     {
         this.scene.debugLayer.show();
-
-        this.prepWorld();
-        this.addPlayer();
-    }
-
-    private addPlayer()
-    {
-        let player = BABYLON.MeshBuilder.CreateBox("player", {width:2, height:4, depth:2}, this.scene);
-        player.position.y = 1;
-
-        // add controller
-        this._controller = new Controller(player);
-        this._controller.speed = 0.5;
-
-        this.shadowGenerator.getShadowMap().renderList.push(player);
-    }
-
-    private prepWorld(assetToUse:Array<BABYLON.Mesh> = null)
-    {
-        let ground1 = BABYLON.MeshBuilder.CreateGround("ground", {width:200, height:200, subdivisions:2, updatable:false}, this.scene);
-        let groundMat = new BABYLON.StandardMaterial("groundMat", this.scene);
-        ground1.material = groundMat;
-        groundMat.specularColor = BABYLON.Color3.Black();
-        //groundMat.wireframe = true;
-        ground1.receiveShadows = true;
-
-        this.shadowGenerator = new BABYLON.ShadowGenerator(1024, <BABYLON.DirectionalLight>this.scene.getLightByID('dirLight'));
-        this.shadowGenerator.setDarkness(0.5);
-        this.shadowGenerator.useBlurVarianceShadowMap = true;
-        this.shadowGenerator.bias = 0.0001;
-        this.shadowGenerator.blurScale = 2;
     }
 
     public createAsset(name:string, mode:number = Game.SELF) : Array<BABYLON.AbstractMesh>
@@ -134,13 +98,7 @@ class Game
     private _runGame()
     {
         this.scene.onPointerDown = (evt, pr) => {
-            if (pr.hit)
-            {
-                let destination = pr.pickedPoint.clone();
-                destination.y = 0;
-                this._controller.addDestination(destination);
-                this._controller.start();
-            }
+
         };
     }
 }
