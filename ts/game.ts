@@ -31,7 +31,7 @@ class Game
         this.scene = new BABYLON.Scene(this.engine);
 
         let camera = new BABYLON.FreeCamera('FreeCam', new BABYLON.Vector3(-50, 55, -60), this.scene);
-        //camera.attachControl(this.engine.getRenderingCanvas());
+        camera.attachControl(this.engine.getRenderingCanvas());
         camera.keysUp.push(87); // "w"
 	    camera.keysDown.push(83); // "s"
 	    camera.keysLeft.push(65); // "a"
@@ -67,7 +67,12 @@ class Game
 
     private _init ()
     {
-        this.scene.debugLayer.show();
+        //this.scene.debugLayer.show();
+
+        var ground:BABYLON.Mesh = BABYLON.Mesh.CreateGround("ground", 100, 100, 2, this.scene);
+        var groundMaterial:BABYLON.StandardMaterial = new BABYLON.StandardMaterial("groundMat", this.scene);
+        ground.material = groundMaterial;
+        groundMaterial.specularColor = BABYLON.Color3.Black();
     }
 
     public createAsset(name:string, mode:number = Game.SELF) : Array<BABYLON.AbstractMesh>
