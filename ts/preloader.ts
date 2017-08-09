@@ -7,20 +7,6 @@ class Preloader
     // Function called when the loader is over
     public callback : () => void;
 
-    private _3dAssetList : string [] = ['Brown_Cliff_01',
-                                        'Brown_Cliff_Bottom_01',
-                                        'Brown_Cliff_Bottom_Corner_01',
-                                        'Brown_Cliff_Bottom_Corner_Green_Top_01',
-                                        'Brown_Cliff_Bottom_Green_Top_01',
-                                        'Brown_Cliff_Corner_01',
-                                        'Brown_Cliff_Corner_Green_Top_01',
-                                        'Brown_Cliff_End_01',
-                                        'Brown_Cliff_End_Green_Top_01',
-                                        'Brown_Cliff_Green_Top_01',
-                                        'Brown_Cliff_Top_01',
-                                        'Brown_Cliff_Top_Corner_01',
-                                       ];
-
     constructor(game:Game)
     {
         this._game = game;
@@ -33,11 +19,7 @@ class Preloader
 
     public loadAssets()
     {
-        for(var asset in this._3dAssetList)
-        {
-            this._addMesh('', this._3dAssetList[asset], 'obj');
-        }
-
+        this._addMesh('tiles');
         this._loader.load();
     }
 
@@ -48,6 +30,8 @@ class Preloader
 
     private _addMesh(folder :string, name?:string, extension?:string )
     {
+        extension = extension == "" ? "babylon":extension;
+
         if (name)
         {
             var task = this._loader.addMeshTask(name, '', `assets/3d/${folder}/`, `${name}.${extension}`);

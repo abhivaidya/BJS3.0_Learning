@@ -80,13 +80,13 @@ class Game
     {
         //this.scene.debugLayer.show();
 
-        this.ground = BABYLON.Mesh.CreateGround("ground", 100, 100, 20, this.scene, true);
+        this.ground = BABYLON.Mesh.CreateGround("ground", 500, 500, 2, this.scene, true);
         var groundMaterial:BABYLON.StandardMaterial = new BABYLON.StandardMaterial("groundMat", this.scene);
         this.ground.material = groundMaterial;
         groundMaterial.diffuseColor = BABYLON.Color3.FromInts(193, 181, 151);
         groundMaterial.specularColor = BABYLON.Color3.Black();
 
-        this.skybox = BABYLON.Mesh.CreateSphere("skyBox", 10, 250, this.scene);
+        this.skybox = BABYLON.Mesh.CreateSphere("skyBox", 10, 500, this.scene);
         var shader = new BABYLON.ShaderMaterial("gradient", this.scene, "gradient", {});
         shader.setFloat("offset", 0);
         shader.setFloat("exponent", 0.6);
@@ -135,7 +135,7 @@ class Game
         axisX.color = new BABYLON.Color3(1, 0, 0);
 
         var xChar = this.makeTextPlane("X", "red", size / 10);
-        xChar.position = new BABYLON.Vector3(0.9 * size, -0.05 * size, 0);
+        xChar.position = new BABYLON.Vector3(0.9 * size, 0.05 * size, 0);
 
         var axisY = BABYLON.Mesh.CreateLines("axisY", [
             BABYLON.Vector3.Zero(), new BABYLON.Vector3(0, size, 0), new BABYLON.Vector3( -0.05 * size, size * 0.95, 0),
