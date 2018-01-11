@@ -57,7 +57,7 @@ var Game = /** @class */ (function () {
         });
     };
     Game.prototype._init = function () {
-        this.scene.debugLayer.show();
+        // this.scene.debugLayer.show();
         this.skybox = BABYLON.Mesh.CreateSphere("skyBox", 10, 500, this.scene);
         var shader = new BABYLON.ShaderMaterial("gradient", this.scene, "gradient", {});
         shader.setFloat("offset", 0);
@@ -91,7 +91,7 @@ var Game = /** @class */ (function () {
         zombie.position.y = 2;
         this._controller = new Controller(zombie);
         this._controller.speed = 1;
-        // this._controller.animationSpeedMultiplier = 2.9; 
+        // this._controller.animationSpeedMultiplier = 2.9;
         this._controller.addAnimation('crawl', 164, 312);
         this._controller.addAnimation('walk', 521, 640);
         this._controller.addAnimation('idle', 320, 486);
@@ -104,7 +104,7 @@ var Game = /** @class */ (function () {
         player.position.y = 2;
         this._playerController = new Controller(player);
         this._playerController.speed = 1;
-        // this._playerController.animationSpeedMultiplier = 2.9; 
+        // this._playerController.animationSpeedMultiplier = 2.9;
         this._playerController.addAnimation('death', 40, 145);
         this._playerController.addAnimation('idle', 150, 450);
         this._playerController.addAnimation('jump', 451, 488);
@@ -143,6 +143,8 @@ var Game = /** @class */ (function () {
                 this._playerController.start();
             }
         };
+        var fpsLabel = document.getElementById("fpsLabel");
+        fpsLabel.innerHTML = this.engine.getFps().toFixed() + " fps";
     };
     Game.prototype.showAxis = function (size) {
         var axisX = BABYLON.Mesh.CreateLines("axisX", [

@@ -72,7 +72,7 @@ var Controller = /** @class */ (function () {
             this.skeleton = this._minion.skeleton;
             // Stop skeleton animations
             this._minion.getScene().stopAnimation(this.skeleton);
-            // Activate animation blending    
+            // Activate animation blending
             this.skeleton.enableBlending(0.08);
         }
     };

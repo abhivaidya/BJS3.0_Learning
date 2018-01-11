@@ -54,7 +54,7 @@ class Game
 	    camera.keysRight.push(68); // "d"
         camera.setTarget(BABYLON.Vector3.Zero());
 
-        
+
         let light = new BABYLON.DirectionalLight("dir", new BABYLON.Vector3(0, -1, 1), this.scene);
         light.position = new BABYLON.Vector3(0, 100, 0);
         light.intensity = 2;
@@ -95,7 +95,7 @@ class Game
 
     private _init ()
     {
-        this.scene.debugLayer.show();
+        // this.scene.debugLayer.show();
 
         this.skybox = BABYLON.Mesh.CreateSphere("skyBox", 10, 500, this.scene);
         var shader = new BABYLON.ShaderMaterial("gradient", this.scene, "gradient", {});
@@ -125,7 +125,7 @@ class Game
         // this.planet2 = BABYLON.Mesh.MergeMeshes(this.createAsset('bedBunk'));
         // this.planet2.position.x = 20;
         // (this.planet2.material as BABYLON.StandardMaterial).diffuseColor = BABYLON.Color3.Black();
-        
+
         // this.planet3 = this.createAsset('Roof_Inner_Corner_Red_01')[0];
         // this.planet3.position.x = 30;
 
@@ -138,7 +138,7 @@ class Game
 
         this._controller = new Controller(zombie);
         this._controller.speed = 1;
-        // this._controller.animationSpeedMultiplier = 2.9; 
+        // this._controller.animationSpeedMultiplier = 2.9;
         this._controller.addAnimation('crawl', 164, 312);
         this._controller.addAnimation('walk', 521, 640);
         this._controller.addAnimation('idle', 320, 486);
@@ -154,7 +154,7 @@ class Game
 
         this._playerController = new Controller(player);
         this._playerController.speed = 1;
-        // this._playerController.animationSpeedMultiplier = 2.9; 
+        // this._playerController.animationSpeedMultiplier = 2.9;
         this._playerController.addAnimation('death', 40, 145);
         this._playerController.addAnimation('idle', 150, 450);
         this._playerController.addAnimation('jump', 451, 488);
@@ -166,12 +166,12 @@ class Game
 
     }
 
-    public createAsset(name:string, mode:number=Game.SELF, newName:string='') : BABYLON.Mesh 
+    public createAsset(name:string, mode:number=Game.SELF, newName:string='') : BABYLON.Mesh
     {
         let mesh : BABYLON.Mesh = <BABYLON.Mesh> this.scene.getMeshByName(name);
         let res = null;
 
-        switch (mode) 
+        switch (mode)
         {
             case Game.SELF:
                 res = mesh;
@@ -180,7 +180,7 @@ class Game
             case Game.CLONE:
                 res = mesh.clone(newName);
                 break;
-                
+
             case Game.INSTANCE:
                 res = mesh.createInstance(newName);
                 break;
@@ -193,7 +193,7 @@ class Game
     {
         this.scene.onPointerDown = function (evt, pickResult) {
             let that = this;
-            if (pickResult.hit) 
+            if (pickResult.hit)
             {
                 let destination = pickResult.pickedPoint.clone();
                 destination.y = 0;
@@ -202,6 +202,9 @@ class Game
                 this._playerController.start();
             }
         };
+
+        let fpsLabel = document.getElementById("fpsLabel");
+        fpsLabel.innerHTML = this.engine.getFps().toFixed() + " fps";
     }
 
     private showAxis(size)

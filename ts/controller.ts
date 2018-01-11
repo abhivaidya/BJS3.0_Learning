@@ -56,7 +56,7 @@ class Controller {
 
     /**
      * Add a destination to this character.
-     * data is a parameter that can be link to a destination. It will be called 
+     * data is a parameter that can be link to a destination. It will be called
      * when the minion arrives at this destination.
      */
     public addDestination(value: BABYLON.Vector3, data?: any) {
@@ -87,7 +87,7 @@ class Controller {
     }
 
     /**
-     * The character looks at the given position, but rotates only along Y-axis 
+     * The character looks at the given position, but rotates only along Y-axis
      * */
     private lookAt(value: BABYLON.Vector3) {
         var dv = value.subtract(this._minion.position);
@@ -95,7 +95,7 @@ class Controller {
         this._minion.rotation.y = yaw;
     }
 
-    /** 
+    /**
      * Attach the given mesh to this controller, and found the character skeleton.
      * The skeleton used for the mesh animation (and the debug viewer) is the first found one.
      */
@@ -108,7 +108,7 @@ class Controller {
             this.skeleton = this._minion.skeleton;
             // Stop skeleton animations
             this._minion.getScene().stopAnimation(this.skeleton);
-            // Activate animation blending    
+            // Activate animation blending
             this.skeleton.enableBlending(0.08);
         }
     }
@@ -196,7 +196,7 @@ class Controller {
     }
 
     /**
-     * Add an animation to this character 
+     * Add an animation to this character
      */
     public addAnimation(name: string, from: number, to: number) {
         if (this.skeleton) {
