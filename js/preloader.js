@@ -1,4 +1,4 @@
-var Preloader = (function () {
+var Preloader = /** @class */ (function () {
     function Preloader(game) {
         this._loader = null;
         this._game = game;
@@ -8,7 +8,9 @@ var Preloader = (function () {
         this._loader.onFinish = this._onFinish.bind(this);
     }
     Preloader.prototype.loadAssets = function () {
-        this._addMesh('tiles');
+        this._addMesh('babylon', 'suburb-assets', 'babylon');
+        this._addMesh('babylon', 'zombie', 'babylon');
+        this._addMesh('babylon', 'man', 'babylon');
         this._loader.load();
     };
     Preloader.prototype._onFinish = function () {
@@ -26,16 +28,16 @@ var Preloader = (function () {
     };
     Preloader.prototype._addMeshAssetToGame = function (t) {
         this._game.assets[t.name] = [];
-        //console.group();
+        // console.group();
         for (var _i = 0, _a = t.loadedMeshes; _i < _a.length; _i++) {
             var m = _a[_i];
             m.convertToFlatShadedMesh();
             m.setEnabled(false);
             this._game.assets[t.name].push(m);
-            //console.log(`%c Loaded : ${m.name}`, 'background: #333; color: #bada55');
+            // console.log(`%c Loaded : ${m.name}`, 'background: #333; color: #bada55');
         }
-        console.log("%c Finished : " + t.name, 'background: #333; color: #bada55');
-        //console.groupEnd();
+        // console.log(`%c Finished : ${t.name}`, 'background: #333; color: #bada55');
+        // console.groupEnd();
     };
     return Preloader;
 }());
