@@ -90,9 +90,8 @@ class Controller {
      * The character looks at the given position, but rotates only along Y-axis
      * */
     private lookAt(value: BABYLON.Vector3) {
-        var dv = value.subtract(this._minion.position);
-        var yaw = -Math.atan2(dv.z, dv.x) - Math.PI / 2;
-        this._minion.rotation.y = yaw;
+        value= value.subtract(this._minion.position);
+        this._minion.rotation.z = -Math.atan2(value.z, value.x) - Math.PI / 2;
     }
 
     /**

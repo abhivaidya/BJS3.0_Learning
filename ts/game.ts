@@ -153,7 +153,7 @@ class Game
         player.position.y = 2;
 
         this._playerController = new Controller(player);
-        this._playerController.speed = 1;
+        this._playerController.speed = 0.25;
         // this._playerController.animationSpeedMultiplier = 2.9;
         this._playerController.addAnimation('death', 40, 145);
         this._playerController.addAnimation('idle', 150, 450);
@@ -191,20 +191,22 @@ class Game
 
     private _runGame()
     {
-        this.scene.onPointerDown = function (evt, pickResult) {
-            let that = this;
-            if (pickResult.hit)
-            {
-                let destination = pickResult.pickedPoint.clone();
-                destination.y = 0;
-                console.log(pickResult);
-                this._playerController.addDestination(destination);
-                this._playerController.start();
-            }
-        };
+        this.scene.onPointerDown = this.onPointerDown.bind(this);
 
         let fpsLabel = document.getElementById("fpsLabel");
         fpsLabel.innerHTML = this.engine.getFps().toFixed() + " fps";
+    }
+
+    private onPointerDown(evt, pickResult)
+    {
+        let that = this;
+        if (pickResult.hit)
+        {
+            let destination = pickResult.pickedPoint.clone();
+            destination.y = 2;
+            this._playerController.addDestination(destination);
+            this._playerController.start();
+        }
     }
 
     private showAxis(size)
